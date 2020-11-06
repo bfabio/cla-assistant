@@ -65,7 +65,7 @@ function authenticateForAdminOnlyApi(req, res, next) {
 }
 
 module.exports = function (req, res, next) {
-    if (config.server.api_access.free.indexOf(req.originalUrl) > -1 || req.isAuthenticated()) {
+    if (config.server.api_access.free.indexOf(req.originalUrl) > -1 && req.isAuthenticated()) {
         return next()
     } else if (config.server.api_access.external.indexOf(req.originalUrl) > -1) {
         return authenticateForExternalApi(req, res, next)
